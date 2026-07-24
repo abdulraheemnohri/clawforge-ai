@@ -1,0 +1,35 @@
+{
+  "name": "clawforge-ai",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ClawForge AI — One Request. One Agent System. Real Work.",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"turbo/*{/ts,tsx,js,jsx,json,kd}\"",
+    "server:dev": "pnpm --filter @clawforge/server dev",
+    "server:build": "pnpm --filter @clawforge/server build",
+    "server:start": "pnpm --filter @clawforge/server start",
+    "server:test": "pnpm --filter @clawforge/server test",
+    "web:dev": "pnpm --filter @clawforge/web dev",
+    "web:build": "pnpm --filter @clawforge/web build",
+    "web:preview": "pnpm --filter @clawforge/web preview",
+    "web:test": "pnpm --filter @clawforge/web test"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "prettier": "^3.3.0",
+    "turbo": "^2.0.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.1.0"
+}
