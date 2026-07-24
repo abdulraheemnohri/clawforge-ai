@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  clawforge:
+    build: .
+    container_name: clawforge-ai
+    ports:
+      - '3777:3777'
+    environment:
+      - NODE_ENV=production
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=3777
+      - DATABASE_URL=./data/clawforge.db
+      - AI_PROVIDER=ollama
+      - AI_MODEL=llama3.2
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+      - LOG_LEVEL=info
+    volumes:
+      - ./data:/app/data
+      - ./workspaces:/app/workspaces
+    restart: unless-stopped
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
