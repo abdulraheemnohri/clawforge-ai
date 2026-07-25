@@ -1,17 +1,27 @@
-import { websocketService } from './websocket/index.js';
-import { WsEventType } from '@clawforge/shared';
+import { sanitizeSecrets } from '../security/utils.js';
 
 export const websocketService = {
+  clients: [] as any[],
   register(f: any) {
     f.get('/ws', { websocket: true }, (socket: any, req: any) => {
-      socket.send(JSON.stringify({ message: 'Connected' }));
+      this.clients.push(socket);
+      socket.send(JSON.stringify({ type: 'CONNECTED', payload: {}, timestamp: new Date().toISOString() }));
+      socket.on('close', () => {
+        this.clients = this.clients.filter((c: any) => c !== socket);
+      });
     });
   },
   broadcastToTask(taskId: string, data: any) {
-    // WebSocket broadcast
-},
-  broadcastAll(data: any) {
-    // Broadcast to all
+    data.payload = data.payload || {};
+    data.payload.taskId = taskId;
+    for (const client of this.clients) {
+      try { client.send(JSON.stringify(data)); } catch (e) {}
+    }
   },
-  getClientCount(): number { return 0; }
+  broadcastAll(data: any) {
+    for (const client of this.clients) {
+      try { client.send(JSON.stringify(data)); } catch (e) {}
+    }
+  },
+  getClientCount() { return this.clients.length; }
 };
