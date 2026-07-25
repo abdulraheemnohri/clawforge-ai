@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/nicfab/tauri-v2-schema/main/schema.json",
+  "productName": "ClawForge AI",
+  "version": "2.0.0",
+  "identifier": "com.clawforge.desktop",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "ClawForge AI",
+        "width": 1200,
+        "height": 800,
+        "minWidth": 800,
+        "minHeight": 600,
+        "center": true,
+        "decorations": true,
+        "transparent": false
+      }
+    ],
+    "security": {
+      "csp": null
+    },
+    "trayIcon": {
+      "iconPath": "icons/icon.png",
+      "tooltip": "ClawForge AI",
+      "menuOnLeftClick": false
+    }
+  },
+  "plugins": {
+    "global-shortcut": {
+      "shortcuts": {
+        "toggle-overlay": "Ctrl+Shift+Space"
+      }
+    },
+    "notification": {
+      "all": true
+    }
+  }
+}
