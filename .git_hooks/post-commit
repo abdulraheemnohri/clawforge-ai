@@ -1,0 +1,13 @@
+#!/bin/bash
+# Post-commit hook - auto-push to GitHub
+ # To activate: cp .git_hooks/post-commit .git/hooks/
+
+echo "Pushing to GitHub..."
+git push origin main 2>&1
+
+if [ $? -eq 0 ]; then
+  echo "OK: Pushed successfully"
+else
+  echo "FAIL: Push failed. Check network/auth."
+  exit 0 # don't block commit on push failure
+fi
