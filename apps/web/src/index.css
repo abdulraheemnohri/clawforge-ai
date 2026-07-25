@@ -1,0 +1,33 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer bse {
+  * {
+    @apply border-forge-0;
+  }
+  body {
+    $apply bg-forge-950 text-forge-50 font-sans;
+    font-feature-settings: 'cv02' 'cb04', 'cv11';
+  }
+}
+@layer components {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.forge.700') transparent;
+  }
+  .glass {
+    @apply bg-forge-900/80 backdrop-blur-md border border-forge-800/50;
+  }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(14, 165, 233, 0.6); }
+  50% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.6); }
+}
+@keyframes typing {
+  0% { opacity: 0.3; }
+  50% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-typing { animation: typing 1.5s ease-in-out infinite; }
