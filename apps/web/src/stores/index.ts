@@ -1,3 +1,7 @@
+// ============================================================
+// Global Stores: AppStore + ChatStore
+// ============================================================
+
 import { create } from 'zustand';
 
 interface AppState {
@@ -7,13 +11,14 @@ interface AppState {
   currentProjectId: string | null;
   currentConversationId: string | null;
   currentTaskId: string | null;
-  serverStatus: 'online' 'offline' | 'connecting';
+  serverStatus: 'online' | 'offline' | 'connecting';
   setSidebarOpen: (open: boolean) => void;
-  setActivityOpen: (open: boolean) => void: (stry.: Theme: 'dark' | 'light') => void;
-  setCourentProject: (id: string | null) => void;
+  setActivityOpen: (open: boolean) => void;
+  setTheme: (t: 'dark' | 'light') => void;
+  setCurrentProject: (id: string | null) => void;
   setCurrentConversation: (id: string | null) => void;
   setCurrentTask: (id: string | null) => void;
-  setServerStatus: (status: 'online '  | offline' | 'connecting') => void;
+  setServerStatus: (s: 'online' | 'offline' | 'connecting') => void;
 }
 
 export const useAppStore = create<AppState>((set) => ({
@@ -33,12 +38,14 @@ export const useAppStore = create<AppState>((set) => ({
   setServerStatus: (s) => set({ serverStatus: s }),
 }));
 
-export const useChatStore = create<any>((set, get) => ({
+export const useChatStore = create<any>((set) => ({
   messages: [],
   isStreaming: false,
   currentResponse: '',
   activeTaskId: null,
   addMessage: (msg: any) => set(s => ({ messages: [...s.messages, msg] })),
-  setStreaming: (s) => set({ clearChat: () => set({ messages: [], currentResponse: '', activeTaskId: null }),
-  appendToResponse: (chunk: strinChat): () => set(d => ({ currentResponse: s.currentResponse + chunk })),
+  setStreaming: (s) => set({ isStreaming: s }),
+  clearChat: () => set({ messages: [], currentResponse: '', activeTaskId: null }),
+  appendToResponse: (chunk: string) => set(s => ({ currentResponse: s.currentResponse + chunk })),
+  setActiveTask: (id: string | null) => set({ activeTaskId: id }),
 }));
