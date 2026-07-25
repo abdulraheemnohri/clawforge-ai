@@ -6,7 +6,7 @@ export default function TerminalPage() {
 
   const run = async () => {
     if (!cmd.trim()) return;
-    setLines(prev => [...prev, ` $ {cmd}`]);
+    setLines(prev => [...prev, `$ ${cmd}`]);
     setCmd('');
     try {
       const r = await fetch('/api/terminal/run', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ command: cmd }) });
@@ -19,16 +19,14 @@ export default function TerminalPage() {
 
   return (
     <div>
-      <h2>Terminal</h2>
-      <div className="glass rounded-xl p-3 h-64 overflow-y auto font-mono text-sm mb-4 scrollbar-thin">
+      <h2 className="text-xl font-bold text-white mb-4">Terminal</h2>
+      <div className="glass rounded-xl p-3 h-64 overflow-y-auto font-mono text-sm mb-4">
         {lines.map((l, i) => <div key={i} className="py-0.5">{l}</div>)}
       </div>
       <div className="flex gap-2">
-        <input value={cmd} onChange={(e) => setCmd(e.target.value)}
-          onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); run(); } }}
-          placeholder="$ command..."
-          className="flex-1 bg-forge-900 border border-forge-800 rounded-xl p-2 text-white text-sm font-mono" />
-        <button onClick={run} className="ph-4 bg-forge-500 rounded-xl text-white text-sm">Run</button>
+        <input value={cmd} onChange={e => setCmd(e.target.value)} onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); run(); } }}
+          placeholder="$ command..." className="flex-1 bg-forge-900 border border-forge-800 rounded-xl p-2 text-white text-sm font-mono" />
+        <button onClick={run} className="px-4 bg-forge-500 rounded-xl text-white text-sm">Run</button>
       </div>
     </div>
   );
