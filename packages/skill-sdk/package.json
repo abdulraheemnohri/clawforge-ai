@@ -1,0 +1,1 @@
+{"name":"@clawforge/skill-sdk","version":"2.0.0","main":"src/index.ts","types":"src/index.ts","dependencies":{"@clawforge/shared":"workspace:*"}}
